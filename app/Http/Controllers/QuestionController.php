@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Quiz;
 use Illuminate\Http\Request;
 
-class QuizController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Quiz $quiz)
+    public function index()
     {
-        $quizzes = $quiz->allQuiz();
-        return view('backend.quiz.index',compact('quizzes'));
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('backend.quiz.create');
+        return view('backend.question.create');
     }
 
     /**
@@ -34,11 +32,10 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Quiz $qui, Request $request)
+    public function store(Question $que, Request $request)
     {
         $data = $this->validateForm($request);
-        $quiz = $qui->storeQuiz($data);
-        return redirect()->back()->with('message', 'Quiz created successfully');
+        $question = 
     }
 
     /**
@@ -58,10 +55,9 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quiz $qui, $id)
+    public function edit($id)
     {
-        $quiz = $qui->getQuizById($id);
-        return view('backend.quiz.edit',compact('quiz'));
+        //
     }
 
     /**
@@ -71,11 +67,9 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Quiz $qui,Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $this->validateForm($request);
-        $quiz = $qui->updateQuiz($id, $data);
-        return redirect(route('quiz.index'))->with('message','Quiz updated successfully');
+        //
     }
 
     /**
@@ -84,17 +78,18 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quiz $qui,$id)
+    public function destroy($id)
     {
-        $qui->deleteQuiz($id);
-        return redirect(route('quiz.index'))->with('message','Quiz deleted successfully');
+        //
     }
 
     public function validateForm($req){
         return $this->validate($req,[
-            'name' => 'required|string',
-            'description' => 'required|min:3|max:500',
-            'minutes' => 'required|integer'
+            'quiz' => 'required',
+            'question' => 'required|min:3',
+            'options' => 'bail|required|array|min:3',
+            'options.*' => 'bail|required|string|distinct',
+            'correct_answer' => 'required'
         ]);
     }
 }

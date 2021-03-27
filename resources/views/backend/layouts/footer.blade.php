@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="container">
-        <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
+        {{-- <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved. --}}
     </div>
 </div>
 <script src="{{ asset('edmin/code/scripts/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
