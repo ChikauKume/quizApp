@@ -12,39 +12,39 @@
             @endif
             <div class="module">
                 <div class="module-head">
-                    <h3>All Quiz</h3>
+                    <h3>All Questions</h3>
                 </div>
                 <div class="module-body">
                     <table class="table table-striped">
                         <thead>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Minutes</th>
+                            <th>Question</th>
+                            <th>Quiz</th>
+                            <th>Created</th>
                             <th></th>
                             <th></th>
                             <th></th>
                         </thead>
                         <tbody>
-                            @if (count($quizzes)>0)
-                                @foreach ($quizzes as $key => $quiz)
+                            @if (count($questions)>0)
+                                @foreach ($questions as $key => $question)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $quiz->name }}</td>
-                                        <td>{{ $quiz->description }}</td>
-                                        <td>{{ $quiz->minutes }}</td>
+                                        <td>{{ $question->question }}</td>
+                                        <td>{{ $question->quiz->name }}</td>
+                                        <td>{{ date('F d,Y',strtotime($question->created_at)) }}</td>
                                         <td>
-                                            <a href="{{ route('quiz.question',[$quiz->id]) }}">
-                                                <button class="btn btn-inverse">View Question</button>  
+                                            <a href="{{ route('question.show',[$question->id]) }}">
+                                                <button class="btn btn-info">View</button>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('quiz.edit',[$quiz->id]) }}">
+                                            <a href="{{ route('question.edit',[$question->id]) }}">
                                                 <button class="btn btn-primary">Edit</button>
                                             </a>
                                         </td>
                                         <td>
-                                            <form class="delete-form{{ $quiz->id }}" action="{{ route('quiz.destroy', [$quiz->id]) }}" method="POST">
+                                            <form class="delete-form{{ $question->id }}" action="{{ route('question.destroy', [$question->id]) }}" method="POST">
                                                 @csrf
                                                 {{ method_field("DELETE") }}
                                                 <input type="submit" value="Delete" class="btn btn-danger">
@@ -57,6 +57,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination pagination-centered">
+                        {{ $questions->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ class Quiz extends Model
 {
     protected $fillable = ['name','description','minutes'];
 
-    public function quesitons(){
+    public function questions(){
         return $this->hasMany(Question::class);
     }
 
@@ -32,5 +32,9 @@ class Quiz extends Model
 
     public function deleteQuiz($id){
         return Quiz::find($id)->delete();
+    }
+
+    public function bindQuestions($id){
+      return Quiz::where('id',$id)->with('questions')->get();
     }
 }

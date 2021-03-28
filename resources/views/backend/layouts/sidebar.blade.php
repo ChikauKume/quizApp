@@ -4,12 +4,15 @@
             <div class="span3">
                 <div class="sidebar">
                     <ul class="widget widget-menu unstyled">
-                        <li class="active"><a href="index.html"><i class="menu-icon icon-dashboard"></i>Dashboard
-                        </a></li>
-                        <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Create Quiz</a>
+                        <li><a href="{{ route('quiz.index') }}"><i class="menu-icon icon-dashboard"></i>Quiz</a></li>
+                        <li><a href="{{ route('quiz.create') }}"><i class="menu-icon icon-bullhorn"></i>Create Quiz</a>
                         </li>
-                        <li><a href="message.html"><i class="menu-icon icon-inbox"></i>View Quiz <b class="label green pull-right">
-                            11</b> </a></li>
+                        {{-- <li><a href="{{ route('quiz.create') }}"><i class="menu-icon icon-inbox"></i>View Quiz</a></li> --}}
+                    </ul>
+
+                    <ul class="widget widget-menu unstyled">
+                        <li><a href="{{ route('question.index') }}"><i class="menu-icon icon-dashboard"></i>Question</a></li>
+                        <li><a href="{{ route('question.create') }}"><i class="menu-icon icon-bullhorn"></i>Create Question</a>
                     </ul>
                     <!--/.widget-nav-->
                     
