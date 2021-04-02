@@ -23,5 +23,8 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },
-    "name": "project"
+    "name": "project",
+    "dependencies": {
+        "moment": "^2.29.1"
+    }
 }

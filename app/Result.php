@@ -11,10 +11,10 @@ class Result extends Model
     protected $fillable = ['user_id','answer_id','quiz_id','question_id'];
 
     public function question(){
-        return $this->belongTo(Question::class);
+        return $this->belongsTo(Question::class);
     }
 
     public function answer(){
-        return $this->belongTo(Answer::class);
+        return $this->belongsTo(Answer::class);
     }
 }

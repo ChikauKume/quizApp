@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Quiz;
+use App\User;
 use App\Question;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,10 @@ class Quiz extends Model
 
     public function questions(){
         return $this->hasMany(Question::class);
+    }
+    
+    public function users(){
+        return $this->belongsTomany(User::class,'quiz_user');
     }
 
     public function storeQuiz($data){
@@ -36,5 +41,22 @@ class Quiz extends Model
 
     public function bindQuestions($id){
       return Quiz::where('id',$id)->with('questions')->get();
+    }
+
+    public function assignExam($data){
+        $quizId = $data['quiz_id'];
+        $quiz = Quiz::find($quizId);
+        $userId = $data['user_id'];
+        return $quiz->users()->syncWithoutDetaching($userId);
+    }
+
+    public function hasQuizAttempted(){
+        $attemptQuiz = [];
+        $authUser = auth()->user()->id;
+        $user = Result::where('user_id',$authUser)->get();
+        foreach($user as $u){
+            array_push($attemptQuiz,$u->quiz_id); 
+        }
+        return $attemptQuiz;
     }
 }
